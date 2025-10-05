@@ -1,7 +1,159 @@
-html, body {
-  margin: 0;
-  padding: 0;
+/* --- Global Styles & Minimalist Theme --- */
+:root {
+    --background-color: #121212; /* Very dark grey */
+    --surface-color: #1E1E1E;   /* Slightly lighter grey for panels */
+    --primary-text-color: #EAEAEA; /* Off-white for readability */
+    --accent-color: #007BFF;       /* A clean, bright blue for highlights */
+    --border-color: #333333;       /* Subtle borders */
 }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+    /* Using a standard system font is fastest */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* Toned-down text style instead of neon */
+h1, h2, h3 {
+    font-family: 'Audiowide', sans-serif; /* Keep the cool font for headers */
+    font-weight: normal;
+    color: var(--primary-text-color);
+}
+
+/* Toned-down button style */
+.neon-button { /* Class name is kept for HTML compatibility */
+    font-family: 'Audiowide', sans-serif;
+    font-size: 1.2rem;
+    color: var(--primary-text-color);
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.neon-button:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* --- Toss Screen Styles --- */
+#toss-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    transition: opacity 0.5s ease-out;
+}
+#toss-screen h1 { font-size: 4rem; margin-bottom: 2rem; }
+#toss-message { font-size: 1.5rem; min-height: 2em; }
+#toss-buttons, #choice-buttons { display: flex; justify-content: center; }
+
+/* --- Simple Coin Style --- */
+#coin-container { perspective: 1000px; margin: 20px 0; }
+#coin { width: 100px; height: 100px; position: relative; transform-style: preserve-3d; transition: transform 2s; }
+#coin .side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 50%;
+    border: 2px solid var(--primary-text-color);
+    background-color: var(--surface-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+#tails { transform: rotateY(180deg); }
+@keyframes flip { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(1800deg); } }
+
+/* --- Game Screen Styles --- */
+#game-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    gap: 20px;
+}
+#game-screen.fade-in { animation: fadeIn 1s ease-in; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+#game-screen header { text-align: center; }
+#game-screen h1 { font-size: 2.5rem; margin: 0; }
+
+/* Simple, performant canvas style */
 canvas {
-  display: block;
+    display: block;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+/* --- Game Layout & Dashboard Styles --- */
+#game-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+}
+
+#dashboard {
+    width: 300px;
+    padding: 20px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+}
+
+#dashboard h2 {
+    margin-top: 0;
+    font-size: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#dashboard .stat, #dashboard .stat-large, #dashboard .stat-full {
+    margin-bottom: 15px;
+}
+
+#dashboard h3 {
+    margin: 0 0 5px 0;
+    font-size: 1rem;
+    color: #aaa; /* Softer color for labels */
+    font-weight: normal;
+}
+
+#dashboard p {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+#dashboard .stat-large p {
+    font-size: 3.5rem;
+    color: var(--accent-color); /* Highlight the total score */
+}
+
+#dashboard .stat-full p {
+    font-size: 1.2rem;
+    min-height: 1.5em;
+    font-weight: normal;
+    color: #ccc;
 }
